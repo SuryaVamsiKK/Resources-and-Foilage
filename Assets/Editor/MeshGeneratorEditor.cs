@@ -9,6 +9,7 @@ public class MeshGeneratorEditor : Editor
     PlanetGenerator myTarget;
     SerializedObject targetForProperties;
     Editor noiseEditor;
+    bool enableBaseInspector = false;
 
     private void OnEnable()
     {
@@ -18,8 +19,10 @@ public class MeshGeneratorEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        //base.OnInspectorGUI();
-        myTarget.currentTab = GUILayout.Toolbar(myTarget.currentTab, new string[] { "Mesh", "LOD", "Shape"});
+        //serializedObject.Update();
+        EditorGUI.BeginChangeCheck();
+
+        myTarget.currentTab = GUILayout.Toolbar(myTarget.currentTab, new string[] { "Mesh", "LOD", "Shape" });
 
         switch (myTarget.currentTab)
         {
@@ -60,14 +63,27 @@ public class MeshGeneratorEditor : Editor
                 break;
         }
 
+        if(EditorGUI.EndChangeCheck())
+        {
+            myTarget.CreatePlanet();
+        }
+
+
         serializedObject.ApplyModifiedProperties();
 
         if (GUILayout.Button("Reconstruct"))
         {
             myTarget.CreatePlanet();
         }
-    }
+        
+        enableBaseInspector = EditorGUILayout.Toggle("Enable Base Inspector", enableBaseInspector);
+        GUILayout.Space(10);
 
+        if (enableBaseInspector)
+        {
+            base.OnInspectorGUI();
+        }
+    }
 
     void DrawSettingsEditor(Object settings, System.Action onSettingsUpdated, ref Editor editor)
     {

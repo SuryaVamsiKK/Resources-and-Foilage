@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11639d9dbcd9b2f4d9d15a26ae5e424d, type: 3}
   m_Name: Layer 2
   m_EditorClassIdentifier: 
-  type: 1
+  foldout: 1
+  type: 0
   numOfLayers: 2
   strength: 0.05
   baseRoughness: 0.65

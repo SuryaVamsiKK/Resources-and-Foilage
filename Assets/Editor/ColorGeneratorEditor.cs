@@ -10,6 +10,7 @@ public class ColorGeneratorEditor : Editor
     SerializedObject targetForProperties;
     Editor biomeEditor;
     Editor noiseEditor;
+    bool enableBaseInspector = false;
 
     private void OnEnable()
     {
@@ -19,8 +20,8 @@ public class ColorGeneratorEditor : Editor
 
     public override void OnInspectorGUI()
     {
-       // base.OnInspectorGUI();
         myTarget.currentTab = GUILayout.Toolbar(myTarget.currentTab, new string[] { "Biomes", "Noise", "Material Properties" });
+        EditorGUI.BeginChangeCheck();
 
         switch (myTarget.currentTab)
         {
@@ -73,7 +74,20 @@ public class ColorGeneratorEditor : Editor
                 break;
         }
 
+        if(EditorGUI.EndChangeCheck())
+        {
+            myTarget.UpdateColorSettings();
+        }
+
         serializedObject.ApplyModifiedProperties();
+        
+        enableBaseInspector = EditorGUILayout.Toggle("Enable Base Inspector", enableBaseInspector);
+        GUILayout.Space(10);
+
+        if (enableBaseInspector)
+        {
+            base.OnInspectorGUI();
+        }
     }
 
     void DrawSettingsEditor(Object settings, System.Action onSettingsUpdated, ref Editor editor)

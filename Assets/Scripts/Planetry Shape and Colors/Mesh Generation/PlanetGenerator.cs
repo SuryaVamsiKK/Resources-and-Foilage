@@ -22,7 +22,7 @@ public class PlanetGenerator : MonoBehaviour {
         shapeSettings.previewResolution = shapeSettings.realResolution;
     }
 
-    void OnValidate()
+    public void OnValidate()
     {
         CreatePlanet();
     }
