@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Noise_Settings
+[CreateAssetMenu(fileName = "New Noise Settings", menuName = "Details/Noise")]
+public class Noise_Settings : ScriptableObject
 {
+    [HideInInspector] public bool foldout;
     public NoiseType type;
 
     [Header("Noise : Pattern")]
@@ -22,4 +23,3 @@ public class Noise_Settings
 
 }
 
-public enum NoiseType { Simple, Rigid }

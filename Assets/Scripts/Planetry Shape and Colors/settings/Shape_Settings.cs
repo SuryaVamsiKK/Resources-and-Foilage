@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Shape_Settings
 {
-    [Range(1, 256)] public int resolution = 10;
+    [Range(1, 256)] public int previewResolution = 10;
     [Range(1, 256)] public int realResolution = 10;
-    public float radius;
-    [Header("Noise")] public NoiseLayer[] noiseLayer;
+    public float planetRadius;
+    [Header("Noise")] public List<NoiseLayer> noiseLayer;
 
     [System.Serializable]
     public class NoiseLayer

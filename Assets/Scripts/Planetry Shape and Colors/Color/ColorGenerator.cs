@@ -9,6 +9,9 @@ public class ColorGenerator : MonoBehaviour
     public Texture2D texture;
     const int resolution = 50;
     NoiseFilter biomeNoiseFilter;
+    
+    [HideInInspector]
+    public int currentTab;
 
     public void CreateMaterial(float min, float max)
     {
@@ -30,8 +33,8 @@ public class ColorGenerator : MonoBehaviour
         UpdateColor();
         material.SetFloat("_specular", settings.specular);
         material.SetFloat("_smoothness", settings.smoothness);
-        material.name = settings.matName;
-    }
+        material.name = settings.materialName;
+    }    
 
     void UpdateColor()
     {
@@ -74,7 +77,12 @@ public class ColorGenerator : MonoBehaviour
         return biomeIndex / Mathf.Max(1, numBiomes - 1);
     }
 
-    private void OnValidate()
+    //private void OnValidate()
+    //{
+    //    UpdateColorSettings();
+    //}
+
+    public void UpdateColorSettings()
     {
         GetComponent<PlanetGenerator>().CreatePlanet();
     }

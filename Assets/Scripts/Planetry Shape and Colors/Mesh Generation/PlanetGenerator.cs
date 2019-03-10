@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlanetGenerator : MonoBehaviour {
-    public GameObject chunk;
 
-    Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
-    string[] names = { "Up", "Down", "Left", "Right", "Front", "Back" };
+    [HideInInspector] public int currentTab;
+
+    public GameObject chunk;
     
     [Header("Shape")] public Shape_Settings shapeSettings;
     [HideInInspector] public Material mat;
@@ -19,7 +19,7 @@ public class PlanetGenerator : MonoBehaviour {
 
     private void Awake()
     {
-        shapeSettings.resolution = shapeSettings.realResolution;
+        shapeSettings.previewResolution = shapeSettings.realResolution;
     }
 
     void OnValidate()
@@ -34,16 +34,16 @@ public class PlanetGenerator : MonoBehaviour {
         {       
             if (transform.childCount < 6) 
             {
-                for (int i = 0; i < directions.Length; i++) 
+                for (int i = 0; i < DataHolder.directions.Length; i++) 
                 {
                     GameObject g = GameObject.Instantiate (chunk, this.transform) as GameObject;
                     g.transform.position -= this.transform.position;
-                    g.name = "Chunk : " + names[i] + " : LOD : " + g.GetComponent<MeshGenerator>().lod;
+                    g.name = "Chunk : " + DataHolder.names[i] + " : LOD : " + g.GetComponent<MeshGenerator>().lod;
 
                     MeshGenerator g_MeshGenerator =  g.GetComponent<MeshGenerator>();
                     g_MeshGenerator.mat = mat;
                     g_MeshGenerator.chunk = chunk;
-                    g_MeshGenerator.localUp = directions[i];
+                    g_MeshGenerator.localUp = DataHolder.directions[i];
                     g_MeshGenerator.shapeSettings = shapeSettings;
                     g_MeshGenerator.colorGenerator = GetComponent<ColorGenerator>();
                     g_MeshGenerator.CreateShape();
@@ -54,16 +54,16 @@ public class PlanetGenerator : MonoBehaviour {
             //this only for live editing or else entire ELSE can be removed
             else
             {
-                for (int i = 0; i < directions.Length; i++) 
+                for (int i = 0; i < DataHolder.directions.Length; i++) 
                 {
                     GameObject g = transform.GetChild (i).gameObject;
                     g.transform.position -= this.transform.position;
-                    g.name = "Chunk : " + names[i] + " : LOD : " + g.GetComponent<MeshGenerator>().lod;
+                    g.name = "Chunk : " + DataHolder.names[i] + " : LOD : " + g.GetComponent<MeshGenerator>().lod;
 
                     MeshGenerator g_MeshGenerator =  g.GetComponent<MeshGenerator>();
                     g_MeshGenerator.mat = mat;
                     g_MeshGenerator.chunk = chunk;
-                    g_MeshGenerator.localUp = directions[i];
+                    g_MeshGenerator.localUp = DataHolder.directions[i];
                     g_MeshGenerator.shapeSettings = shapeSettings;
                     g_MeshGenerator.colorGenerator = GetComponent<ColorGenerator>();
                     g_MeshGenerator.CreateShape();
@@ -80,12 +80,12 @@ public class PlanetGenerator : MonoBehaviour {
                 {
                     GameObject g = GameObject.Instantiate (chunk, this.transform) as GameObject;
                     g.transform.position -= this.transform.position;
-                    g.name = "Chunk : " + names[i] + " : LOD : " + g.GetComponent<MeshGenerator>().lod;
+                    g.name = "Chunk : " + DataHolder.names[i] + " : LOD : " + g.GetComponent<MeshGenerator>().lod;
 
                     MeshGenerator g_MeshGenerator =  g.GetComponent<MeshGenerator>();
                     g_MeshGenerator.mat = mat;
                     g_MeshGenerator.chunk = chunk;
-                    g_MeshGenerator.localUp = directions[i];
+                    g_MeshGenerator.localUp = DataHolder.directions[i];
                     g_MeshGenerator.shapeSettings = shapeSettings;
                     g_MeshGenerator.colorGenerator = GetComponent<ColorGenerator>();
                     g_MeshGenerator.CreateShape();
@@ -100,12 +100,12 @@ public class PlanetGenerator : MonoBehaviour {
                 {
                     GameObject g = transform.GetChild (i).gameObject;
                     g.transform.position -= this.transform.position;
-                    g.name = "Chunk : " + names[i] + " : LOD : " + g.GetComponent<MeshGenerator>().lod;
+                    g.name = "Chunk : " + DataHolder.names[i] + " : LOD : " + g.GetComponent<MeshGenerator>().lod;
 
                     MeshGenerator g_MeshGenerator =  g.GetComponent<MeshGenerator>();
                     g_MeshGenerator.mat = mat;
                     g_MeshGenerator.chunk = chunk;
-                    g_MeshGenerator.localUp = directions[i];
+                    g_MeshGenerator.localUp = DataHolder.directions[i];
                     g_MeshGenerator.shapeSettings = shapeSettings;
                     g_MeshGenerator.colorGenerator = GetComponent<ColorGenerator>();
                     g_MeshGenerator.CreateShape();

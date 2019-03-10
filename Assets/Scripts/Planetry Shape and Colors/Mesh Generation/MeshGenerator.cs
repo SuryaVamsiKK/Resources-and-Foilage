@@ -66,10 +66,10 @@ public class MeshGenerator : MonoBehaviour
         axisB = Vector3.Cross(localUp, axisA);
 
         mesh = new Mesh();
-        verts = new Vector3[(shapeSettings.resolution + 1) * (shapeSettings.resolution + 1)];
-        uvs = new Vector2[(shapeSettings.resolution + 1) * (shapeSettings.resolution + 1)];
+        verts = new Vector3[(shapeSettings.previewResolution + 1) * (shapeSettings.previewResolution + 1)];
+        uvs = new Vector2[(shapeSettings.previewResolution + 1) * (shapeSettings.previewResolution + 1)];
 
-        triangles = new int[(shapeSettings.resolution) * (shapeSettings.resolution) * 6]; 
+        triangles = new int[(shapeSettings.previewResolution) * (shapeSettings.previewResolution) * 6]; 
         int vert = 0; 
         int triIndex = 0;
 
@@ -87,9 +87,9 @@ public class MeshGenerator : MonoBehaviour
 
         #endregion
 
-        for (int x = 0,i = 0; x <= shapeSettings.resolution; x++) 
+        for (int x = 0,i = 0; x <= shapeSettings.previewResolution; x++) 
         {
-            for (int z = 0; z <= shapeSettings.resolution; z++)
+            for (int z = 0; z <= shapeSettings.previewResolution; z++)
             {
 
                 #region Adjustment of valuse according to the LOD to implement on vertices.
@@ -101,7 +101,7 @@ public class MeshGenerator : MonoBehaviour
 
                 #endregion
 
-                Vector2 localVert = (new Vector2(x, z) / shapeSettings.resolution);
+                Vector2 localVert = (new Vector2(x, z) / shapeSettings.previewResolution);
                 if(lod > 0)
                 {
                     #region Vertices based on Quad Tree position of the plane 
@@ -122,7 +122,7 @@ public class MeshGenerator : MonoBehaviour
                         planerRefrence = new Vector2(1f,1f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2);
                     }
                     
-                    localVert = (new Vector2(x, z) / shapeSettings.resolution) - planerRefrence;
+                    localVert = (new Vector2(x, z) / shapeSettings.previewResolution) - planerRefrence;
                     #endregion
                 }
 
@@ -174,15 +174,15 @@ public class MeshGenerator : MonoBehaviour
 
                 #endregion
 
-                if (x!= shapeSettings.resolution && z!= shapeSettings.resolution)
+                if (x!= shapeSettings.previewResolution && z!= shapeSettings.previewResolution)
                 {
                     #region Triagnles
 
-                    triangles[triIndex + 0] = vert + shapeSettings.resolution + 2;
-                    triangles[triIndex + 1] = vert + shapeSettings.resolution + 1;
+                    triangles[triIndex + 0] = vert + shapeSettings.previewResolution + 2;
+                    triangles[triIndex + 1] = vert + shapeSettings.previewResolution + 1;
                     triangles[triIndex + 2] = vert + 1;
                     triangles[triIndex + 3] = vert + 1;
-                    triangles[triIndex + 4] = vert + shapeSettings.resolution + 1;
+                    triangles[triIndex + 4] = vert + shapeSettings.previewResolution + 1;
                     triangles[triIndex + 5] = vert + 0;
 
                     #endregion
@@ -192,7 +192,7 @@ public class MeshGenerator : MonoBehaviour
                 }
             }
 
-            if(x!= shapeSettings.resolution)
+            if(x!= shapeSettings.previewResolution)
             {                
                 vert++;
             }

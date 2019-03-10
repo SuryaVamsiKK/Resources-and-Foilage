@@ -23,7 +23,7 @@ public class QuadTreePlanetry : MonoBehaviour
         else
         {
             maxDepth = transform.parent.GetComponent<PlanetGenerator>().lodSettings.maxDepth;
-            threshold = transform.parent.GetComponent<PlanetGenerator>().shapeSettings.radius + transform.parent.GetComponent<PlanetGenerator>().lodSettings.playerdetectionRadius;
+            threshold = transform.parent.GetComponent<PlanetGenerator>().shapeSettings.planetRadius + transform.parent.GetComponent<PlanetGenerator>().lodSettings.playerdetectionRadius;
         }
     }
 

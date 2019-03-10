@@ -8,6 +8,8 @@ public class NoiseFilter
     Noise noise = new Noise();
     Noise_Settings noiseSettings;
 
+    #region Constructors
+
     public NoiseFilter(Shape_Settings shapeSettings)
     {
         this.shapeSettings = shapeSettings;
@@ -17,6 +19,10 @@ public class NoiseFilter
     {
         this.noiseSettings = noiseSettings;
     }
+
+    #endregion
+
+    #region Elevation Calculation
 
     public float noiseEvaluation(Vector3 point)
     {
@@ -30,13 +36,16 @@ public class NoiseFilter
         return noisevalue;
     }
 
+    #endregion
+
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnSpher, Vector3 Pos, out float elevation)
     {
         //float elaviation = (noiseEvaluation(pointOnSphere * noiseSettings.roughness + noiseSettings.center)) * noiseSettings.strength;
         //return pointOnSphere * shapeSettings.radius * (elaviation + 1f);
+
         float elaviation = 0;
         Vector3 pointOnSphere = pointOnSpher;
-        for (int a = 0; a < shapeSettings.noiseLayer.Length; a++)
+        for (int a = 0; a < shapeSettings.noiseLayer.Count; a++)
         {
             if(shapeSettings.noiseLayer[a].enable)
             {
@@ -54,11 +63,13 @@ public class NoiseFilter
             }
         }
 
-        elaviation = shapeSettings.radius * (elaviation + 1f);
+        elaviation = shapeSettings.planetRadius * (elaviation + 1f);
         //elevation = elaviation - ((shapeSettings.radius/2f) + 1f)/10f);
         elevation = elaviation;
         return pointOnSphere * elaviation;
     }
+
+    #region Noise Calculation for Mesh
 
     public float RighidNoiseValue(int a, Vector3 pointOnSphere)
     {
@@ -109,6 +120,10 @@ public class NoiseFilter
         return noiseValue;
     }
 
+    #endregion
+
+    #region Noise Calculations for Shaders
+
     public float SimpleNoiseValueBiome(Vector3 pointOnSphere)
     {
         float noiseValue = 0;
@@ -130,4 +145,6 @@ public class NoiseFilter
 
         return noiseValue;
     }
+
+    #endregion
 }
