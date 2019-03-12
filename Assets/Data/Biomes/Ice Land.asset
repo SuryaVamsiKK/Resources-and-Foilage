@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Ice Cap
-  m_EditorClassIdentifier: Assembly-CSharp::Biome
+  m_Script: {fileID: 11500000, guid: 7ceeffb67b922154ebc94e73cc270898, type: 3}
+  m_Name: Ice Land
+  m_EditorClassIdentifier: 
   foldout: 1
-  BiomeName: Polar Cap
+  BiomeName: Ice Land
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
     key1: {r: 1, g: 1, b: 1, a: 1}
     key2: {r: 0.4156863, g: 0.4156863, b: 0.4156863, a: 0}
     key3: {r: 0.9215687, g: 0.9725491, b: 1, a: 0}
-    key4: {r: 0.5516643, g: 0.6468064, b: 0.7264151, a: 0}
-    key5: {r: 0.41037738, g: 0.72946745, b: 1, a: 0}
-    key6: {r: 0.36320752, g: 0.4481134, b: 1, a: 0}
+    key4: {r: 0.64705884, g: 0.83921576, b: 1, a: 0}
+    key5: {r: 0, g: 0.5394733, b: 1, a: 0}
+    key6: {r: 0, g: 0.13275027, b: 1, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 6168
@@ -40,9 +40,9 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 1
+    m_Mode: 0
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  tint: {r: 1, g: 1, b: 1, a: 1}
+  tint: {r: 0, g: 0, b: 0, a: 0}
   startHeight: 0
   tintPercent: 0

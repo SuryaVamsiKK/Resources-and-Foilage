@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4626136898307257170}
   - component: {fileID: 4626136898307257171}
   - component: {fileID: 2426587331503943895}
+  - component: {fileID: 6962023807641047523}
   m_Layer: 0
   m_Name: Chunk
   m_TagString: Untagged
@@ -53,13 +54,15 @@ MonoBehaviour:
   colorGenerator: {fileID: 0}
   side: 0
   shapeSettings:
-    resolution: 10
+    previewResolution: 10
     realResolution: 10
-    radius: 0
+    planetRadius: 0
     noiseLayer: []
   localUp: {x: 0, y: 0, z: -1}
   mat: {fileID: 2100000, guid: 68ed928803553894d9f77e2c48b30dc2, type: 2}
   planetCore: {fileID: 0}
+  mainFace: {fileID: 0}
+  spwanAblepoints: []
 --- !u!33 &4626136898307257170
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -122,3 +125,15 @@ MonoBehaviour:
   recreate: 0
   revertToHigherLOD: 0
   maxDepth: 0
+--- !u!114 &6962023807641047523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626136898307257168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37fda5c5da5c1c4cbe1ec5ea4318a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

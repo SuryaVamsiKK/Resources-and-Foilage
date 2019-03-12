@@ -43,6 +43,9 @@ public class MeshGenerator : MonoBehaviour
     public Transform planetCore;
     public Transform mainFace;
 
+    public List<int> spwanAblepoints = new List<int>();
+    public List<Vector3> spwanablePosition = new List<Vector3>();
+
     private void UpdateColor()
     {
         if(lod <= 1)
@@ -87,7 +90,7 @@ public class MeshGenerator : MonoBehaviour
 
         #endregion
 
-        for (int x = 0,i = 0; x <= shapeSettings.previewResolution; x++) 
+        for (int x = 0, i = 0; x <= shapeSettings.previewResolution; x++)
         {
             for (int z = 0; z <= shapeSettings.previewResolution; z++)
             {
@@ -96,32 +99,32 @@ public class MeshGenerator : MonoBehaviour
 
                 float scale = 2f;
                 float pos = -0.5f;
-                scale = (2/(Mathf.Pow(2,lod)));
+                scale = (2 / (Mathf.Pow(2, lod)));
                 pos = Mathf.Pow(2, lod - 1) - 1;
 
                 #endregion
 
                 Vector2 localVert = (new Vector2(x, z) / shapeSettings.previewResolution);
-                if(lod > 0)
+                if (lod > 0)
                 {
                     #region Vertices based on Quad Tree position of the plane 
                     if (quad_Location == 0)
-                    {                        
-                        planerRefrence = new Vector2(0f,0f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2); 
+                    {
+                        planerRefrence = new Vector2(0f, 0f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2);
                     }
-                    if(quad_Location == 1)
-                    {                        
-                        planerRefrence = new Vector2(1f,0f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2);
+                    if (quad_Location == 1)
+                    {
+                        planerRefrence = new Vector2(1f, 0f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2);
                     }
-                    if(quad_Location == 2)
-                    {                        
-                        planerRefrence = new Vector2(0f,1f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2);
+                    if (quad_Location == 2)
+                    {
+                        planerRefrence = new Vector2(0f, 1f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2);
                     }
-                    if(quad_Location == 3)
-                    {                        
-                        planerRefrence = new Vector2(1f,1f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2);
+                    if (quad_Location == 3)
+                    {
+                        planerRefrence = new Vector2(1f, 1f) + (transform.parent.GetComponent<MeshGenerator>().planerRefrence * 2);
                     }
-                    
+
                     localVert = (new Vector2(x, z) / shapeSettings.previewResolution) - planerRefrence;
                     #endregion
                 }
@@ -147,8 +150,18 @@ public class MeshGenerator : MonoBehaviour
                      */
                     #endregion
 
-                    transform.parent.GetComponent<PlanetGenerator>().elevationMinMax.AddValue(elevaltion);                    
+                    transform.parent.GetComponent<PlanetGenerator>().elevationMinMax.AddValue(elevaltion);
                 }
+
+                if (elevaltion > 2.6f && elevaltion < 2.8f)
+                {
+                    if (uvs[i].x < 0.679f)
+                    {
+                        spwanAblepoints.Add(i);
+                        spwanablePosition.Add(verts[i]);
+                    }   
+                }
+
 
                 /*
                  *  1.  Biome index can be extracted from that point for which type of object to spwan and change its values accordingly 
@@ -174,7 +187,7 @@ public class MeshGenerator : MonoBehaviour
 
                 #endregion
 
-                if (x!= shapeSettings.previewResolution && z!= shapeSettings.previewResolution)
+                if (x != shapeSettings.previewResolution && z != shapeSettings.previewResolution)
                 {
                     #region Triagnles
 
@@ -192,8 +205,8 @@ public class MeshGenerator : MonoBehaviour
                 }
             }
 
-            if(x!= shapeSettings.previewResolution)
-            {                
+            if (x != shapeSettings.previewResolution)
+            {
                 vert++;
             }
         }
@@ -260,7 +273,7 @@ public class MeshGenerator : MonoBehaviour
         material.SetFloat("_smoothness", mat.GetFloat("_smoothness"));
         material.SetFloat("_specular", mat.GetFloat("_specular"));
         material.SetVector("_planetCenter", planetCore.position);
-        /* 
+        /*
          * FUCKING DUCK THE BIGGEST BUG OF LIFE ..... 
          * The shader evaluation of hight was in object space meaing local space but since 
          * the planet is being rotated the face's position is alred but still doing a stupid thing of taking the world positions like is shit face idiot ...
