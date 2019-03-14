@@ -19,15 +19,9 @@ public class ColorGenerator : MonoBehaviour
         {
             texture = new Texture2D(resolution, settings.biomeColorSettings.biomes.Length); 
         }
-
-        if (material == null)
-        {
-            material = new Material(settings.shader);
-        }
-        else
-        {
-            material.shader = settings.shader;
-        }
+        
+        material = new Material(settings.shader);
+        
 
         material.SetVector("_elivationMinMax", new Vector4(min, max));
         UpdateColor();

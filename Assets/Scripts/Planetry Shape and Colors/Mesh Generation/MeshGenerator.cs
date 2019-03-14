@@ -215,6 +215,16 @@ public class MeshGenerator : MonoBehaviour
     void Update()
     {
         GetComponent<MeshRenderer>().sharedMaterial.SetVector("_planetCenter", planetCore.position);
+        if(lod >= planetCore.GetComponent<PlanetGenerator>().lodSettings.maxDepth)
+        {
+            GetComponent<MeshCollider>().enabled = true;
+            GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
+        }
+        else
+        {
+            GetComponent<MeshCollider>().enabled = false;
+            GetComponent<MeshCollider>().sharedMesh = null;
+        }
     }
 
     public void UpdateMesh()

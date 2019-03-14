@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4626136898307257171}
   - component: {fileID: 2426587331503943895}
   - component: {fileID: 6962023807641047523}
+  - component: {fileID: 7233071547932231751}
   m_Layer: 0
   m_Name: Chunk
   m_TagString: Untagged
@@ -59,10 +60,11 @@ MonoBehaviour:
     planetRadius: 0
     noiseLayer: []
   localUp: {x: 0, y: 0, z: -1}
-  mat: {fileID: 2100000, guid: 68ed928803553894d9f77e2c48b30dc2, type: 2}
+  mat: {fileID: 0}
   planetCore: {fileID: 0}
   mainFace: {fileID: 0}
-  spwanAblepoints: []
+  spwanAblepoints: 
+  spwanablePosition: []
 --- !u!33 &4626136898307257170
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -88,7 +90,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 68ed928803553894d9f77e2c48b30dc2, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,3 +139,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37fda5c5da5c1c4cbe1ec5ea4318a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &7233071547932231751
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626136898307257168}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 0}
