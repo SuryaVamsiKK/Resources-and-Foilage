@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Foilage : MonoBehaviour
 {
-    static int numTrees = 500;
+    static int numTrees = 200;
     public GameObject tree;
     static GameObject[] trees;
 
@@ -15,6 +15,7 @@ public class Foilage : MonoBehaviour
         for (int i = 0; i < numTrees; i++)
         {
             trees[i] = (GameObject)Instantiate(tree, Vector3.zero, Quaternion.identity);
+            trees[i].transform.parent = this.transform;
             trees[i].SetActive(false);
         }
     }
@@ -28,7 +29,8 @@ public class Foilage : MonoBehaviour
                 return trees[i];
             }
         }
-
         return null;
     }
+
+
 }

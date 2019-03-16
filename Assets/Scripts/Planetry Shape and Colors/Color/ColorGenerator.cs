@@ -19,9 +19,9 @@ public class ColorGenerator : MonoBehaviour
         {
             texture = new Texture2D(resolution, settings.biomeColorSettings.biomes.Length); 
         }
+        biomeNoiseFilter = new NoiseFilter(settings.biomeColorSettings.noise);
         
-        material = new Material(settings.shader);
-        
+        material = new Material(settings.shader);        
 
         material.SetVector("_elivationMinMax", new Vector4(min, max));
         UpdateColor();
@@ -41,7 +41,7 @@ public class ColorGenerator : MonoBehaviour
                 Color grdiantColor = biomes.gradient.Evaluate(i / (resolution - 1f));
                 Color tintCol = biomes.tint;
 
-                colors[colorIndex] = (grdiantColor * (1 - biomes.tintPercent)) + (tintCol * biomes.tintPercent);
+                colors[colorIndex] = grdiantColor * (1 - biomes.tintPercent) + (tintCol * biomes.tintPercent);
                 colorIndex++;
             }
         }
@@ -52,14 +52,13 @@ public class ColorGenerator : MonoBehaviour
 
     public float biomePercentFromPoint(Vector3 pointOnUnitSphere)
     {
-        biomeNoiseFilter = new NoiseFilter(settings.biomeColorSettings.noise);
         float heightPercent = (pointOnUnitSphere.y + 1) / 2f;
 
         heightPercent += (biomeNoiseFilter.SimpleNoiseValueBiome(pointOnUnitSphere) - settings.biomeColorSettings.noiseOffset) * settings.biomeColorSettings.noiseStrengeth;
 
         float biomeIndex = 0;
         int numBiomes = settings.biomeColorSettings.biomes.Length;
-        float blendRange = settings.biomeColorSettings.blendAmount / 2f + 0.00001f;
+        float blendRange = settings.biomeColorSettings.blendAmount / 2f + .001f;
         for (int i = 0; i < numBiomes; i++)
         {
             float dst = heightPercent - settings.biomeColorSettings.biomes[i].startHeight;
@@ -68,7 +67,7 @@ public class ColorGenerator : MonoBehaviour
             biomeIndex += i * weight;
         }
 
-        return biomeIndex / Mathf.Max(1, numBiomes - 1);
+        return (biomeIndex / Mathf.Max(1, numBiomes - 1));
     }
 
     //private void OnValidate()

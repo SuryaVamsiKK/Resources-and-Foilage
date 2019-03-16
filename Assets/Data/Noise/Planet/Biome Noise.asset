@@ -15,7 +15,7 @@ MonoBehaviour:
   foldout: 1
   type: 0
   numOfLayers: 3
-  strength: 2
+  strength: 0
   baseRoughness: 2.75
   roughness: 3
   persistance: 0.1

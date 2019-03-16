@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37fda5c5da5c1c4cbe1ec5ea4318a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spwanTrees: 1
 --- !u!64 &7233071547932231751
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class Randomizereditor : Editor
 
         EditorGUILayout.PropertyField(targetForProperties.FindProperty("seed"));
         EditorGUILayout.PropertyField(targetForProperties.FindProperty("noOfNumbers"));
+        EditorGUILayout.PropertyField(targetForProperties.FindProperty("debug"));
 
         if (GUILayout.Button("Generate"))
         {

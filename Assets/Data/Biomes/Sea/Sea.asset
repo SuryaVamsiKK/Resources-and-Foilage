@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sea
   m_EditorClassIdentifier: 
   foldout: 1
-  BiomeName: 
+  BiomeName: Water
   gradient:
     serializedVersion: 2
     key0: {r: 0, g: 0.5394733, b: 1, a: 1}

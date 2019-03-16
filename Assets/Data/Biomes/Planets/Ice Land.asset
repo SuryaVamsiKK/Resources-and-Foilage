@@ -43,6 +43,6 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  tint: {r: 0, g: 0, b: 0, a: 0}
+  tint: {r: 0.60784316, g: 0.8235295, b: 1, a: 1}
   startHeight: 0
   tintPercent: 0

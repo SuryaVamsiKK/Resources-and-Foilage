@@ -153,12 +153,15 @@ public class MeshGenerator : MonoBehaviour
                     transform.parent.GetComponent<PlanetGenerator>().elevationMinMax.AddValue(elevaltion);
                 }
 
-                if (elevaltion > 2.6f && elevaltion < 2.8f)
+                if (elevaltion > 1.3f * planetCore.GetComponent<PlanetGenerator>().shapeSettings.planetRadius && elevaltion < 1.4f * planetCore.GetComponent<PlanetGenerator>().shapeSettings.planetRadius)
                 {
                     if (uvs[i].x < 0.679f)
                     {
-                        spwanAblepoints.Add(i);
-                        spwanablePosition.Add(verts[i]);
+                        if (lod >= planetCore.GetComponent<PlanetGenerator>().lodSettings.maxDepth)
+                        {
+                            spwanAblepoints.Add(i);
+                            spwanablePosition.Add(verts[i]);
+                        }
                     }   
                 }
 

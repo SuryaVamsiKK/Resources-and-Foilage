@@ -30,6 +30,8 @@ public class PlanetGenerator : MonoBehaviour {
     public void CreatePlanet ()
     {
         elevationMinMax = new MinMax();
+        GetComponent<ColorGenerator>().CreateMaterial(max, min);
+        mat = GetComponent<ColorGenerator>().material;
         if (!singleFace)
         {       
             if (transform.childCount < 6) 
@@ -68,7 +70,6 @@ public class PlanetGenerator : MonoBehaviour {
                     g_MeshGenerator.colorGenerator = GetComponent<ColorGenerator>();
                     g_MeshGenerator.CreateShape();
                     g_MeshGenerator.UpdateMesh();
-
                 }
             }
         }

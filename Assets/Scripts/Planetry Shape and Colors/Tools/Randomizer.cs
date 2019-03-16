@@ -6,21 +6,49 @@ public class Randomizer : MonoBehaviour
 {
     [HideInInspector] public int seed;
     [HideInInspector] public int noOfNumbers;
+    [HideInInspector] public bool debug;
 
-    public void GenerateSingleNumber(int seed)
+    public void SetSeed(int seed)
     {
         Random.InitState(seed);
-        PrintRandom();
     }
-    public void GenerateSingleNumber()
+
+    public float GenerateSingleNumber(int seed)
     {
-        Random.InitState(seed);
-        PrintRandom();
+        SetSeed(seed);
+        float n = Random.Range(1f, 100f);
+        PrintRandom(n);
+        return n;
     }
+    public float GenerateSingleNumber()
+    {
+        float n = Random.Range(1f, 100f);
+        PrintRandom(n);
+        return n;
+    }
+    public float GenerateSingleNumber(float min, float max)
+    {
+        float n = Random.Range(min, max);
+        PrintRandom(n);
+        return n;
+    }
+    public float GenerateSingleNumber(int seed, float min, float max)
+    {
+        SetSeed(seed);
+        float n = Random.Range(min, max);
+        PrintRandom(n);
+        return n;
+    }
+
     public void GenerateNNumbers(int seed, int noOfNumbers)
     {
-        Random.InitState(seed);
-
+        for (int i = 0; i < noOfNumbers; i++)
+        {
+            PrintRandom();
+        }
+    }
+    public void GenerateNNumbers(int noOfNumbers)
+    {
         for (int i = 0; i < noOfNumbers; i++)
         {
             PrintRandom();
@@ -28,6 +56,7 @@ public class Randomizer : MonoBehaviour
     }
     public void GenerateNNumbers()
     {
+        SetSeed(seed);
         Random.InitState(seed);
 
         for (int i = 0; i < noOfNumbers; i++)
@@ -36,8 +65,23 @@ public class Randomizer : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        SetSeed(seed);
+    }
+
     void PrintRandom()
     {
-        Debug.Log(Random.Range(1f, 100f));
+        if (debug)
+        {
+            Debug.Log(Random.Range(1f, 100f));
+        }
+    }
+    void PrintRandom(float n)
+    {
+        if (debug)
+        {
+            Debug.Log(n);
+        }
     }
 }
