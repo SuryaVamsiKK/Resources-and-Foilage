@@ -4,32 +4,47 @@ using UnityEngine;
 
 public class Foilage : MonoBehaviour
 {
-    static int numTrees = 200;
+    static int numTrees = 10;
     public GameObject tree;
-    static GameObject[] trees;
+    //static List<GameObject> trees;
 
     // Start is called before the first frame update
     void Awake()
     {
-        trees = new GameObject[numTrees];
-        for (int i = 0; i < numTrees; i++)
-        {
-            trees[i] = (GameObject)Instantiate(tree, Vector3.zero, Quaternion.identity);
-            trees[i].transform.parent = this.transform;
-            trees[i].SetActive(false);
-        }
+        //reSpwan(); 
     }
 
-    static public GameObject getTree()
+    public void Update()
     {
-        for (int i = 0; i < numTrees; i++)
-        {
-            if(!trees[i].activeSelf)
-            {
-                return trees[i];
-            }
-        }
-        return null;
+        //if(trees.Count != numTrees)
+        //{
+        //    reSpwan();
+        //}
+    }
+
+    //public void reSpwan()
+    //{
+    //    trees = new List<GameObject>();
+    //    for (int i = 0; i < numTrees; i++)
+    //    {
+
+    //        trees.Add(treeI);
+    //        treeI.transform.parent = this.transform;
+    //        treeI.SetActive(false);
+    //    }
+    //}
+
+    public GameObject getTree()
+    {
+    //    for (int i = 0; i < trees.Count; i++)
+    //    {
+    //        if (!trees[i].activeSelf)
+    //        {
+    //            return trees[i];
+    //        }
+    //    }
+       GameObject treeI = (GameObject)Instantiate(tree, Vector3.zero, Quaternion.identity);
+       return treeI;
     }
 
 

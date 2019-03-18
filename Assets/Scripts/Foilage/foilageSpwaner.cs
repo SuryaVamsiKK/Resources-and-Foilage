@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class foilageSpwaner : MonoBehaviour
 {
-    List<GameObject> myTrees = new List<GameObject>();
+    [HideInInspector] public List<GameObject> myTrees = new List<GameObject>();
     public bool spwanTrees;
 
     // Start is called before the first frame update
@@ -17,13 +17,13 @@ public class foilageSpwaner : MonoBehaviour
             {                
                 if (GetComponent<MeshGenerator>().planetCore.GetComponent<Randomizer>().GenerateSingleNumber(1f, 1000f) > 995f)
                 {
-                    GameObject newTree = Foilage.getTree();
+                    GameObject newTree = GameObject.FindObjectOfType<Foilage>().getTree();
                     if (newTree != null)
                     {
                         Vector3 treePos = GetComponent<MeshGenerator>().spwanablePosition[i];
                         newTree.transform.position = treePos;
                         newTree.transform.up = GetComponent<MeshFilter>().sharedMesh.normals[GetComponent<MeshGenerator>().spwanAblepoints[i]].normalized;
-                        newTree.SetActive(true);
+                        newTree.transform.parent = this.transform;
                         myTrees.Add(newTree);
                     }
                 }
@@ -32,16 +32,16 @@ public class foilageSpwaner : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    public void Reseter()
     {
         for (int i = 0; i < myTrees.Count; i++)
         {
-            if(myTrees[i] != null)
+            if (myTrees[i] != null)
             {
                 myTrees[i].transform.parent = GameObject.FindObjectOfType<Foilage>().transform;
                 myTrees[i].SetActive(false);
             }
-            myTrees.Clear();
-        }        
+        }
+        myTrees.Clear();
     }
 }

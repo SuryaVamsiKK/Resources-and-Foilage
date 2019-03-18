@@ -7,8 +7,9 @@ public class QuadTreePlanetry : MonoBehaviour
     [HideInInspector] public float threshold = 2f;
     public bool divide = false;
     [HideInInspector] public bool recreate = false;
-    [HideInInspector] public bool revertToHigherLOD = false;
+    public bool revertToHigherLOD = false;
     [HideInInspector] public int maxDepth = 0;
+    //GameObject Foilge;
 
     bool divided = false;
     
@@ -25,23 +26,42 @@ public class QuadTreePlanetry : MonoBehaviour
             maxDepth = transform.parent.GetComponent<PlanetGenerator>().lodSettings.maxDepth;
             threshold = transform.parent.GetComponent<PlanetGenerator>().shapeSettings.planetRadius + transform.parent.GetComponent<PlanetGenerator>().lodSettings.playerdetectionRadius;
         }
+
+        //if(maxDepth == 0)
+        //{
+            //Foilge = GameObject.FindObjectOfType<Foilage>().gameObject;
+            //Foilge.transform.parent = GetComponent<MeshGenerator>().planetCore.transform.parent;
+        //}
     }
 
     void Update()
     {
-        if(Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position) < threshold && maxDepth > 0)
+        
+        if (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position) < threshold)
         {
-            divide = true;
-            if(!divided)
+            if (maxDepth > 0)
             {
-                quadTree();
-                divided = true;
+                divide = true;
+                if (!divided)
+                {
+                    quadTree();
+                    divided = true;
+                }
             }
         }
         else
         {
+            if(maxDepth == 0)
+            {
+                //if (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.parent.position) > transform.parent.GetComponent<QuadTreePlanetry>().threshold)
+                //{
+                //GetComponent<foilageSpwaner>().Reseter();
+                //}
+                goto lb; 
+            }
+
             divided = false;
-            if(transform.childCount > 0)
+            if (transform.childCount > 0)
             {
                 for (int i = 0; i < transform.childCount; i++)
                 {
@@ -49,6 +69,7 @@ public class QuadTreePlanetry : MonoBehaviour
                     GetComponent<MeshRenderer>().enabled = true;
                 }
             }
+            lb:;
         }
     }
 
@@ -109,20 +130,28 @@ public class QuadTreePlanetry : MonoBehaviour
             }
         }
     
-        if(revertToHigherLOD)
-        {
-            #region Revert
+        //if(revertToHigherLOD)
+        //{
+        //    #region Revert
 
-            GetComponent<MeshRenderer>().enabled = true;
-            revertToHigherLOD = false;
+        //    GetComponent<MeshRenderer>().enabled = true;
+        //    revertToHigherLOD = false;
 
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                Debug.Log(i);
-                DestroyImmediate(transform.GetChild(i).gameObject);
-            }
+        //    for (int i = 0; i < transform.childCount; i++)
+        //    {
+        //        Debug.Log(i);
+        //        if (transform.GetChild(i).GetComponent<foilageSpwaner>() != null)
+        //        {
+        //            transform.GetChild(i).GetComponent<foilageSpwaner>().Reseter();
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            Destroy(transform.GetChild(i).gameObject);
+        //        }
+        //    }
 
-            #endregion
-        }
+        //    #endregion
+        //}
     }
 }

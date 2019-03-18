@@ -158,6 +158,7 @@ public class MeshGenerator : MonoBehaviour
                     if (uvs[i].x < 0.679f)
                     {
                         if (lod >= planetCore.GetComponent<PlanetGenerator>().lodSettings.maxDepth)
+                        if (lod >= planetCore.GetComponent<PlanetGenerator>().lodSettings.maxDepth)
                         {
                             spwanAblepoints.Add(i);
                             spwanablePosition.Add(verts[i]);
